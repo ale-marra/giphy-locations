@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Giphy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <input id="address" type="text" size="50" placeholder="NYC subway stations">
+    <input id="submit" type="submit" value="Get places" onclick="getInfo()"></input>
+    <p id="description"></p>
+    <div id="result">
+    </div>
+</body>
+
+<script src="//code.jquery.com/jquery-1.12.3.js"></script>
+<script>
+
+function getInfo(fast){
+    let address = $("#address").val();
+    $("#result").empty();
+    updateRes('');
+    if (address.length > 2) {
+        $.ajax({
+        type: "POST",
+        url: "/address/",
+        contentType: "json",
+        data: JSON.stringify({ address: address }),
+        dataType: "json",
+        success: function(result){display(result,address)},
+        error: function(xhr,status,error){updateRes('error: ' + error) }
+        })
+    }
+    else{
+        updateRes('Insert more than two characters');
+    }
+}
+
+function display(result,address){
+    if (result.length > 0){
+        updateRes('Here all the results for "' + address + '":')
+        result.map(function(place,number) {
+            let gifSrc =  src="https://i.giphy.com/media/" + place['gif'] + "/giphy.webp"
+            $("#result").append(
+            '<h3>' + place['name'] + '</h3>' +
+            '<p>' + place['formatted_address'] + '</p>' +
+            '<img src=' + gifSrc + '>'
+            );
+        })    
+    }    
+}
+
+
+function updateRes(text){
+    $("#description").text(text);
+}
+
+</script>
+
+</html>
