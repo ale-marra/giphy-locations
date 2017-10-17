@@ -1,6 +1,6 @@
 ## Description
 
-A Flask application that takes an input and than calls GoogleMaps getting a list of location with whatever the input was and a suggested giphies for those places
+A Flask application that takes an input and than calls GoogleMaps getting a list of location with whatever the input was and a suggested GIF for those places
 
 
 ## Compatability
