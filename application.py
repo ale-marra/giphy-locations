@@ -44,12 +44,6 @@ def addressPost():
     places = googleReq(address)
     usedGifs = set()
 
-
-    
-    print('-***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***--***-')
-    print(address)
-
-
     # creating multiple threads to handle the requests (max 20) asynchronously
     # this threads will update the contents of the variables places and usedGifs
     threads = [None]*len(places)
